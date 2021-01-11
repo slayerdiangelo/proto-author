@@ -5,8 +5,6 @@ import styled from 'styled-components';
 const Styles=styled.div`
     .navbar{
         background-color: black;
-        position: absolute;
-        bottom:0;
         width: 100%;
     }
 `;
@@ -33,7 +31,7 @@ const Line = styled.hr`
 const Footer = () =>{
     return(
             <Styles>
-                <Navbar>
+                <Navbar className="navbar-fixed-bottom">
                     <Container className="justify-content-center">
                         <Row> 
                             <Col md={3}><Column>

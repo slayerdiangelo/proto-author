@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
     Container, Row, Col, Card, Button, CardImg, CardBody,
     CardTitle, CardText } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import styled from'styled-components';
@@ -27,7 +28,7 @@ class Home extends Component{
                                     <CardBody>
                                         <CardTitle>New User?</CardTitle>
                                         <CardText>Create an account and join our endevour.</CardText>
-                                        <Button>Sign-Up <i class='fa fa-user-plus' aria-hidden="true"></i></Button>
+                                        <Button><Link to='/register' style={{ color: 'white', textDecoration: 'none' }}>Sign-Up </Link><i class='fa fa-user-plus' aria-hidden="true"></i></Button>
                                     </CardBody>
                                 </Card>
                             </Col>
@@ -37,13 +38,14 @@ class Home extends Component{
                                     <CardBody>
                                         <CardTitle>Have an Account?</CardTitle>
                                         <CardText>Login and explore our deep collection of books.</CardText>
-                                        <Button>Login  <i class='fa fa-sign-in' aria-hidden="true"></i></Button>
+                                        <Button><Link to='/login' style={{color: 'white', textDecoration: 'none'}}>Login </Link><i class='fa fa-sign-in' aria-hidden="true"></i></Button>
                                     </CardBody>
                                 </Card>
                             </Col>
                         </Styles>
                     </Row>
                 </Container>
+                <Footer/>
             </>
         )
     }
