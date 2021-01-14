@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Card, Row, Col, Button, Form, FormGroup, Label, Input, Container } from 'reactstrap';
+import { connect } from "react-redux";
+import { loginUser } from "../actions/authActions";
 import Header from '../HeaderComponent';
 import Footer from '../FooterComponent';
 import styled from 'styled-components';
@@ -23,22 +25,28 @@ class Login extends Component{
             password: "",
         };
     }
+    componentWillReceiveProps(nextProps){
+        if(nextProps.auth.isAuthenticated){
+            this.props.history.push('/')
+        }
+    }
     onChange = e =>{
         this.setState({[e.target.id] : e.target.value});
     }
 
     onSubmit = e => {
         e.preventDefault();
-        const UserData = {
+        const userData = {
             email: this.state.email,
             password: this.state.password
         };
+        this.props.loginUser(userData);
     }
     render(){
         return(
             <>
             <Header/>
-            <Container>
+            <Container style={{minHeight: "75vh"}}>
                 <Row className='justify-content-center'>
                     <Col md={4}>
                         <CardStyles>
@@ -87,5 +95,8 @@ class Login extends Component{
     }
 
 }
-
-export default Login;
+const mapStateToProps = state => ({
+    auth: state.auth,
+    errors: state.errors
+})
+export default connect(mapStateToProps, { loginUser })(Login);

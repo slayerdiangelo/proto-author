@@ -19,7 +19,7 @@ class Home extends Component{
         return(
             <>
             <Header/>
-                <Container>
+                <Container style={{ minHeight: "75vh" }}>
                     <Row>
                         <Styles>
                             <Col sm={{size:4}}>

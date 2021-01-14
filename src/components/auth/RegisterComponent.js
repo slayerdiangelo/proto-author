@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { Card, Row, Col, Button, Form, FormGroup, Label, Input, Container } from 'reactstrap';
+import { registerUser } from '../actions/authActions'
+import { connect } from 'react-redux'
 import Header from '../HeaderComponent';
 import Footer from '../FooterComponent';
 import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
 
 const FormStyles = styled.div`
     margin: 15px;
@@ -34,7 +37,7 @@ class Register extends Component {
 
     onSubmit = e => {
         e.preventDefault();
-        const NewUser = {
+        const newUser = {
             name: this.state.name,
             email: this.state.email,
             tele: this.state.tele,
@@ -43,12 +46,13 @@ class Register extends Component {
             state: this.state.state,
             password: this.state.password
         };
+        this.props.registerUser(newUser, this.props.history)
     }
     render() {
         return (
             <>
                 <Header />
-                <Container>
+                <Container style={{ minHeight: "75vh" }}>
                     <Row className='justify-content-center'>
                         <Col md={4}>
                             <CardStyles>
@@ -157,4 +161,9 @@ class Register extends Component {
     }
 }
 
-export default Register;
+const mapStateToProps = state => ({
+    auth: state.auth,
+    errors: state.errors
+})
+
+export default connect( mapStateToProps, { registerUser })(withRouter(Register));
