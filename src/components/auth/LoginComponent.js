@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Card, Row, Col, Button, Form, FormGroup, Label, Input, Container } from 'reactstrap';
 import { connect } from "react-redux";
 import { loginUser } from "../actions/authActions";
+import { withRouter } from 'react-router-dom';
 import Header from '../HeaderComponent';
 import Footer from '../FooterComponent';
 import styled from 'styled-components';
@@ -27,7 +28,7 @@ class Login extends Component{
     }
     componentWillReceiveProps(nextProps){
         if(nextProps.auth.isAuthenticated){
-            this.props.history.push('/')
+            this.props.history.push('/books')
         }
     }
     onChange = e =>{
@@ -95,8 +96,11 @@ class Login extends Component{
     }
 
 }
-const mapStateToProps = state => ({
-    auth: state.auth,
-    errors: state.errors
-})
-export default connect(mapStateToProps, { loginUser })(Login);
+const mapStateToProps = state => {
+    console.log(state.auth.isAuthenticated)
+    return{
+        auth: state.auth,
+        errors: state.errors
+    }
+}
+export default connect(mapStateToProps, { loginUser })(withRouter(Login));

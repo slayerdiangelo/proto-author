@@ -65,6 +65,7 @@ class Books extends Component{
                     </Row>
                 </Styles>
                 </Container>
+                <Footer/>
             </div>
         )
     }
