@@ -1,22 +1,10 @@
 import React, { Component } from 'react';
-import { Card, Row, Col, Button, Form, FormGroup, Label, Input, Container } from 'reactstrap';
+import { Row, Col, Button, Form, FormGroup, Label, Input, Container } from 'reactstrap';
 import { registerUser } from '../actions/authActions'
 import { connect } from 'react-redux'
 import Header from '../HeaderComponent';
 import Footer from '../FooterComponent';
-import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
-
-const FormStyles = styled.div`
-    margin: 15px;
-`;
-
-const CardStyles = styled.div`
-
-    display: flex;
-    flex-direction: column;
-    margin: 15px;
-`;
 
 class Register extends Component {
     constructor() {
@@ -50,113 +38,126 @@ class Register extends Component {
     }
     render() {
         return (
-            <>
+            <div>
                 <Header />
                 <Container style={{ minHeight: "75vh" }}>
+                    <h4 style={{ textAlign: 'center', marginTop: '15px' }}>SIGN UP</h4>
                     <Row className='justify-content-center'>
                         <Col md={4}>
-                            <CardStyles>
-                                <Card>
-                                    <Container>
-                                        <FormStyles>
-                                            <Form onSubmit={this.onSubmit}>
-                                                <FormGroup>
-                                                    <Row>
-                                                        <Col>
-                                                            <Label>Name</Label>
-                                                        </Col>
-                                                    </Row>
-                                                    <Row className='justify-content-center'>
-                                                        <Col md={12}>
-                                                            <Input onChange={this.onChange} value={this.state.name} type="text" id="name" />
-                                                        </Col>
-                                                    </Row>
-                                                </FormGroup>
-                                                <FormGroup>
-                                                    <Row>
-                                                        <Col>
-                                                            <Label>Email</Label>
-                                                        </Col>
-                                                    </Row>
-                                                    <Row className='justify-content-center'>
-                                                        <Col md={12}>
-                                                            <Input onChange={this.onChange} value={this.state.email} type="email" id="email" />
-                                                        </Col>
-                                                    </Row>
-                                                </FormGroup>
-                                                <FormGroup>
-                                                    <Row>
-                                                        <Col>
-                                                            <Label>Telephone</Label>
-                                                        </Col>
-                                                    </Row>
-                                                    <Row className='justify-content-center'>
-                                                        <Col md={12}>
-                                                            <Input onChange={this.onChange} value={this.state.tele} type="text" id="tele" />
-                                                        </Col>
-                                                    </Row>
-                                                </FormGroup>
-                                                <FormGroup>
-                                                    <Row>
-                                                        <Col>
-                                                            <Label>Address</Label>
-                                                        </Col>
-                                                    </Row>
-                                                    <Row className='justify-content-center'>
-                                                        <Col md={12}>
-                                                            <Input onChange={this.onChange} value={this.state.address} type="text" id="address" />
-                                                        </Col>
-                                                    </Row>
-                                                </FormGroup>
-                                                <FormGroup>
-                                                    <Row>
-                                                        <Col>
-                                                            <Label>City</Label>
-                                                        </Col>
-                                                    </Row>
-                                                    <Row className='justify-content-center'>
-                                                        <Col md={12}>
-                                                            <Input onChange={this.onChange} value={this.state.city} type="text" id="city" />
-                                                        </Col>
-                                                    </Row>
-                                                </FormGroup>
-                                                <FormGroup>
-                                                    <Row>
-                                                        <Col>
-                                                            <Label>State</Label>
-                                                        </Col>
-                                                    </Row>
-                                                    <Row className='justify-content-center'>
-                                                        <Col md={12}>
-                                                            <Input onChange={this.onChange} value={this.state.state} type="text" id="state" />
-                                                        </Col>
-                                                    </Row>
-                                                </FormGroup>
-                                                <FormGroup>
-                                                    <Row>
-                                                        <Col>
-                                                            <Label>Password</Label>
-                                                        </Col>
-                                                    </Row>
-                                                    <Row className='justify-content-center'>
-                                                        <Col md={12}>
-                                                            <Input onChange={this.onChange} value={this.state.password} type="password" id="password" />
-                                                        </Col>
-                                                    </Row>
-                                                </FormGroup>
-                                                <Row className='justify-content-center'>
-                                                    <Button color="primary" type="submit">Register</Button>
-                                                </Row>
-                                            </Form>
-                                        </FormStyles>
-                                    </Container>
-                                </Card>
-                            </CardStyles>
+                            <Container style={{ border: '2px solid grey', borderRadius: '16px', margin: '15px' }}>
+                                <Form onSubmit={this.onSubmit} style={{margin: '15px'}}>
+                                    <Row>
+                                        <Col md={12}>
+                                            <h5 style={{ marginBottom: '15px' }}>BASIC DETAILS</h5>
+                                        </Col>
+                                    </Row>
+                                    <FormGroup>
+                                        <Row>
+                                            <Col>
+                                                <Label>Name</Label>
+                                            </Col>
+                                        </Row>
+                                        <Row className='justify-content-center'>
+                                            <Col md={12}>
+                                                <Input onChange={this.onChange} value={this.state.name} type="text" id="name" />
+                                            </Col>
+                                        </Row>
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Row>
+                                            <Col>
+                                                <Label>Email</Label>
+                                            </Col>
+                                        </Row>
+                                        <Row className='justify-content-center'>
+                                            <Col md={12}>
+                                                <Input onChange={this.onChange} value={this.state.email} type="email" id="email" />
+                                            </Col>
+                                        </Row>
+                                    </FormGroup>
+                                    <hr />
+                                    <Row>
+                                        <Col md={12}>
+                                            <h5 style={{ marginBottom: '15px' }}>CONTACT DETAILS</h5>
+                                        </Col>
+                                    </Row>
+                                    <FormGroup>
+                                        <Row>
+                                            <Col>
+                                                <Label>Mobile Phone Number</Label>
+                                            </Col>
+                                        </Row>
+                                        <Row className='justify-content-center'>
+                                            <Col md={12}>
+                                                <Input onChange={this.onChange} value={this.state.tele} type="text" id="tele" />
+                                            </Col>
+                                        </Row>
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Row>
+                                            <Col>
+                                                <Label>Address</Label>
+                                            </Col>
+                                        </Row>
+                                        <Row className='justify-content-center'>
+                                            <Col md={12}>
+                                                <Input onChange={this.onChange} value={this.state.address} type="text" id="address" />
+                                            </Col>
+                                        </Row>
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Row>
+                                            <Col>
+                                                <Label>City</Label>
+                                            </Col>
+                                        </Row>
+                                        <Row className='justify-content-center'>
+                                            <Col md={12}>
+                                                <Input onChange={this.onChange} value={this.state.city} type="text" id="city" />
+                                            </Col>
+                                        </Row>
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Row>
+                                            <Col>
+                                                <Label>State</Label>
+                                            </Col>
+                                        </Row>
+                                        <Row className='justify-content-center'>
+                                            <Col md={12}>
+                                                <Input onChange={this.onChange} value={this.state.state} type="text" id="state" />
+                                            </Col>
+                                        </Row>
+                                    </FormGroup>
+                                    <hr/>
+                                    <Row>
+                                        <Col md={12}>
+                                            <h5 style={{ marginBottom: '15px' }}>SET A PASSWORD</h5>
+                                        </Col>
+                                    </Row>
+                                    <FormGroup>
+                                        <Row>
+                                            <Col>
+                                                <Label>Password</Label>
+                                            </Col>
+                                        </Row>
+                                        <Row className='justify-content-center'>
+                                            <Col md={12}>
+                                                <Input onChange={this.onChange} value={this.state.password} type="password" id="password" />
+                                            </Col>
+                                        </Row>
+                                    </FormGroup>
+                                    <hr/>
+                                    <Row className='justify-content-center'>
+                                        <Button color="secondary" type="submit">Submit</Button>
+                                    </Row>
+                                </Form>
+                            </Container>
                         </Col>
                     </Row>
                 </Container>
                 <Footer/>
-            </>
+            </div>
         )
     }
 }

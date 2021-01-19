@@ -1,22 +1,10 @@
 import React, { Component } from 'react';
-import { Card, Row, Col, Button, Form, FormGroup, Label, Input, Container } from 'reactstrap';
+import { Row, Col, Button, Form, FormGroup, Label, Input, Container } from 'reactstrap';
 import { connect } from "react-redux";
 import { loginUser } from "../actions/authActions";
 import { withRouter } from 'react-router-dom';
 import Header from '../HeaderComponent';
 import Footer from '../FooterComponent';
-import styled from 'styled-components';
-
-const FormStyles=styled.div`
-    margin: 15px;
-`;
-
-const CardStyles=styled.div`
-
-    display: flex;
-    flex-direction: column;
-    margin: 15px;
-`;
 
 class Login extends Component{
     constructor(){
@@ -45,16 +33,14 @@ class Login extends Component{
     }
     render(){
         return(
-            <>
-            <Header/>
-            <Container style={{minHeight: "75vh"}}>
-                <Row className='justify-content-center'>
-                    <Col md={4}>
-                        <CardStyles>
-                        <Card>
-                            <Container>
-                            <FormStyles>
-                            <Form onSubmit={this.onSubmit}>
+            <div>
+                <Header/>
+                <Container style={{minHeight: "75vh"}}>
+                    <h4 style={{ textAlign: 'center', marginTop: '15px' }}>LOG IN</h4>
+                    <Row className='justify-content-center'>
+                        <Col md={4}>                             
+                            <Container style={{ border: '2px solid grey', borderRadius: '16px', margin: '15px' }}>
+                            <Form onSubmit={this.onSubmit} style={{ margin: '15px' }}>
                                 <FormGroup>
                                     <Row>
                                         <Col>
@@ -79,25 +65,21 @@ class Login extends Component{
                                         </Col>
                                     </Row>
                                 </FormGroup>
+                                <hr/>
                                 <Row className='justify-content-center'>
-                                    <Button color="primary" type="submit">Log In</Button>
+                                    <Button color="secondary" type="submit">Submit</Button>
                                 </Row>
                             </Form>
-                            </FormStyles>
                             </Container>
-                        </Card>
-                        </CardStyles>
-                    </Col>
-                </Row>
-            </Container>
-            <Footer/>
-            </>
+                        </Col>
+                    </Row>
+                </Container>
+                <Footer/>
+            </div>
         )
     }
-
 }
 const mapStateToProps = state => {
-    console.log(state.auth.isAuthenticated)
     return{
         auth: state.auth,
         errors: state.errors

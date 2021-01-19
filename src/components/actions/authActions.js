@@ -1,13 +1,11 @@
 import axios from 'axios';
-import setAuthToken from "../utils/setAuthToken";
-import jwt_decode from 'jwt-decode';
-import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./types";
+import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING, BOOK_INFO } from "./types";
 
 
 export const registerUser=(userData, history) => dispatch => {
-    axios.post("http://localhost:5000/users/register",userData)
-        .then(res=>history.push("/login"))
-        .catch(err=>
+    axios.post("http://localhost:5000/users",userData)
+        .then((res)=>history.push("/login"))
+        .catch((err)=>
             dispatch({
                 type: GET_ERRORS,
                 payload: err.response.data
@@ -15,17 +13,18 @@ export const registerUser=(userData, history) => dispatch => {
 }
 
 export const loginUser = userData => dispatch => {
-    axios.post("http://localhost:5000/users/login",userData)
-        .then(res=>{
-            const { token }=res.data;
-            localStorage.setItem("jwtToken",token);
-            setAuthToken(token);
-            const decoded=jwt_decode(token);
-            dispatch(setCurrentUser(decoded));
+    axios.get("http://localhost:5000/users")
+        .then((res)=>{
+            res.data.map(user => {
+                if(user.email === userData.email){
+                    if(user.password === userData.password)
+                        dispatch(setCurrentUser(user));
+                }
+            })
         })
-        .catch(err=>dispatch({
+        .catch((err)=>dispatch({
             type: GET_ERRORS,
-            payload: err.response.data
+            payload: err.data
         }))
 }
 
@@ -43,7 +42,19 @@ export const setUserLoading = () => {
 };
 
 export const logoutUser = () => dispatch => {
-    localStorage.removeItem("jwtToken");
-    setAuthToken(false);
     dispatch(setCurrentUser({}));
 };
+
+export const getBookInfo = () => dispatch =>{
+    axios.get("http://localhost:5000/books")
+        .then( (res) => {
+            dispatch({
+                type: BOOK_INFO,
+                payload: res.data
+            })
+        })
+        .catch((err) => dispatch({
+            type: GET_ERRORS,
+            payload: err.data
+    }))
+}
