@@ -3,17 +3,22 @@ import { Container, Col, Row, Form, FormGroup, Label, Button, Input, InputGroup,
 import Header from '../HeaderComponent';
 import Footer from '../FooterComponent';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
+import { submitBook } from '../actions/authActions'
+import axios from 'axios';
+
 
 class SubmitBook extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            id: this.props.id,
+            user_id: this.props.id,
             title: "",
             author: "",
             desc: "",
-            price: ""
+            price: "",
+            year: "",
+            redirect: false
         };
     }
     onChange = (e) =>{
@@ -22,14 +27,23 @@ class SubmitBook extends Component{
     onSubmit = (e) =>{
         e.preventDefault();
         const bookData = {
-            id: this.state.id,
+            user_id: this.state.user_id,
             title: this.state.title,
             author: this.state.author,
             desc: this.state.desc,
-            price: this.state.price
+            price: this.state.price,
+            year: this.state.year
         };
+        this.props.submitBook(bookData);
+        this.setState({ redirect: true });
+
     }
     render(){
+        if(this.state.redirect){
+            return(
+                <Redirect to = '/books'/>
+            )
+        }
         return(
             <div>
                 <Header />
@@ -65,6 +79,18 @@ class SubmitBook extends Component{
                                         <Row className='justify-content-center'>
                                             <Col md={12}>
                                                 <Input onChange={this.onChange} value={this.state.author} type="text" id="author" />
+                                            </Col>
+                                        </Row>
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Row>
+                                            <Col>
+                                                <Label>Year</Label>
+                                            </Col>
+                                        </Row>
+                                        <Row className='justify-content-center'>
+                                            <Col md={12}>
+                                                <Input onChange={this.onChange} value={this.state.year} type="text" id="year" />
                                             </Col>
                                         </Row>
                                     </FormGroup>
@@ -122,4 +148,4 @@ const mapStateToProps = state => ({
         id: state.auth.user.id
 })
 
-export default connect( mapStateToProps )(withRouter(SubmitBook));
+export default connect( mapStateToProps, { submitBook } )(withRouter(SubmitBook));

@@ -1,5 +1,7 @@
 import axios from 'axios';
+import React from 'react'
 import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING, BOOK_INFO } from "./types";
+
 
 
 export const registerUser=(userData, history) => dispatch => {
@@ -17,8 +19,10 @@ export const loginUser = userData => dispatch => {
         .then((res)=>{
             res.data.map(user => {
                 if(user.email === userData.email){
-                    if(user.password === userData.password)
+                    if(user.password === userData.password){
+                        localStorage.setItem("user", JSON.stringify(user));
                         dispatch(setCurrentUser(user));
+                    }
                 }
             })
         })
@@ -57,4 +61,11 @@ export const getBookInfo = () => dispatch =>{
             type: GET_ERRORS,
             payload: err.data
     }))
+}
+
+export const submitBook = (bookData) => dispatch =>{
+    axios.post("http://localhost:5000/books", bookData)
+        .then((res) =>{
+            dispatch(getBookInfo());
+        })
 }
