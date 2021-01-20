@@ -1,6 +1,6 @@
-Install Node First
+install Node First
 
-Download and extract this repo
+download and extract this repo
 
 cd to the extracted dir in cmd
 
