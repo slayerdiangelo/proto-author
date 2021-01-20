@@ -8,6 +8,6 @@ run ```npm install``` to install all dependencies
 
 before running the command below you should start the ```json-server```, go to that repo and check out the readme
 
-run ```npm start``` 
+run ```npm start``` after starting then ```json-server```
 
 browser will be opened with this app
