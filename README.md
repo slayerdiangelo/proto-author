@@ -1,4 +1,4 @@
-install nodejs First https://nodejs.org/en/download/
+install nodejs first --> https://nodejs.org/en/download/
 
 download and extract this repo
 
