@@ -8,7 +8,7 @@ import Footer from '../FooterComponent';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
-import { getBookInfo } from '../actions/authActions';
+import { getBookInfo, getBook} from '../actions/authActions';
 
 const Styles = styled.div`
     display: flex;
@@ -26,8 +26,9 @@ const Image=styled.div`
 
 const Top = styled.div`
     .jumbo{
-        background: url("./images/cover.jpg");
+        background: url("/images/cover.jpg");
         color: white;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         position: relative;
     }
 `;
@@ -64,13 +65,13 @@ class Books extends Component{
                                 <Col md={4}>
                                     <BookStyles>
                                     <Card><Image>
-                                        <CardImg src='./images/img-1.jpg' alt="Card image cap" />
+                                        <CardImg src='/images/img-1.jpg' alt="Card image cap" />
                                         </Image><CardBody>
                                             <CardTitle tag="h5">{book.title}</CardTitle>
-                                                <CardSubtitle tag="h6" className="mb-2 text-muted">₹{book.price}</CardSubtitle>
+                                                <CardSubtitle tag="h6" className="mb-2 text-muted">₹ {book.price}</CardSubtitle>
                                             <CardText>{book.author}</CardText>
                                             <div className="text-center">
-                                                <Button outline color="secondary">More Info</Button>
+                                                    <Button color="secondary" onClick={() => this.props.getBook(book.id)}><Link to={`/info/${book.id}`} style={{ color: 'white', textDecoration: 'none' }}>More Info</Link></Button>
                                             </div>
                                         </CardBody>
                                     </Card>
@@ -86,6 +87,6 @@ class Books extends Component{
     }
 }
 const mapStateToProps = state => ({
-    book: state.book
+    book: state.books
 })
-export default connect(mapStateToProps, { getBookInfo })(Books);
+export default connect(mapStateToProps, { getBookInfo, getBook })(Books);

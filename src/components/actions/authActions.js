@@ -1,8 +1,5 @@
 import axios from 'axios';
-import React from 'react'
-import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING, BOOK_INFO } from "./types";
-
-
+import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING, BOOK_INFO, USER_BOOK } from "./types";
 
 export const registerUser=(userData, history) => dispatch => {
     axios.post("http://localhost:5000/users",userData)
@@ -46,6 +43,7 @@ export const setUserLoading = () => {
 };
 
 export const logoutUser = () => dispatch => {
+    localStorage.removeItem("user");
     dispatch(setCurrentUser({}));
 };
 
@@ -67,5 +65,28 @@ export const submitBook = (bookData) => dispatch =>{
     axios.post("http://localhost:5000/books", bookData)
         .then((res) =>{
             dispatch(getBookInfo());
+        })
+}
+
+export const getUser = (book) => dispatch =>{
+    axios.get("http://localhost:5000/users")
+    .then((res) =>{
+        const user = res.data.find((user) =>{
+            return user.id === book.user_id;
+        })
+        dispatch({
+            type: USER_BOOK,
+            payload:  { book, user }
+        })
+    })
+}
+
+export const getBook = (bookId) => dispatch => {
+    axios.get("http://localhost:5000/books")
+        .then((res) => {
+            const book = res.data.find((book) => {
+                return book.id === bookId;
+            })
+            dispatch(getUser(book))
         })
 }

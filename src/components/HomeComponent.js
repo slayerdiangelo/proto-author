@@ -24,7 +24,7 @@ class Home extends Component{
                         <Styles>
                             <Col sm={{size:4}}>
                                 <Card>
-                                    <CardImg src='./images/sign.jpg' alt="Card image cap" />
+                                    <CardImg src='/images/sign.jpg' alt="Card image cap" />
                                     <CardBody>
                                         <CardTitle>New User?</CardTitle>
                                         <CardText>Create an account and join our endevour.</CardText>
@@ -34,7 +34,7 @@ class Home extends Component{
                             </Col>
                             <Col sm={{ size: 4 }}>
                                 <Card>
-                                    <CardImg src='./images/login.jpg' alt="Card image cap" />
+                                    <CardImg src='/images/login.jpg' alt="Card image cap" />
                                     <CardBody>
                                         <CardTitle>Have an Account?</CardTitle>
                                         <CardText>Login and explore our deep collection of books.</CardText>

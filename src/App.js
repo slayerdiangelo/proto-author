@@ -6,9 +6,10 @@ import Home from './components/HomeComponent';
 import Book from './components/auth/BooksComponent';
 import Login from './components/auth/LoginComponent';
 import Register from './components/auth/RegisterComponent';
-import SubmitBook from './components/auth/SubmitBookComponent'
-import { setCurrentUser } from './components/actions/authActions'
-import PrivateRoute from './components/privateRoute/privateRoute'
+import SubmitBook from './components/auth/SubmitBookComponent';
+import { setCurrentUser } from './components/actions/authActions';
+import BookInfo from './components/auth/BookInfoComponent'
+import PrivateRoute from './components/privateRoute/privateRoute';
 
 const user = JSON.parse(localStorage.getItem('user'))
 if(user){
@@ -23,14 +24,14 @@ class App extends Component{
                     <Route exact path="/login" component={Login} />
                     <Route exact path="/register" component={Register} />
                     <Switch>
-                        <PrivateRoute exact path="/post" component={SubmitBook} />
                         <PrivateRoute exact path="/books" component={Book} />
+                        <PrivateRoute exact path="/info/:id" component={BookInfo} />
+                        <PrivateRoute exact path="/post" component={SubmitBook} />
                     </Switch>
                 </Router>
             </Provider>
         );
     }
 }
-
 
 export default App;

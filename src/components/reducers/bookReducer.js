@@ -10,7 +10,7 @@ export default function(state=initalState, action){
         case BOOK_INFO:
             return {
                 isLoaded: true,
-                books:action.payload
+                books: action.payload
             }
         default:
             return state;

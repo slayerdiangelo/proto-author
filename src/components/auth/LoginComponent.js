@@ -14,6 +14,11 @@ class Login extends Component{
             password: "",
         };
     }
+    componentDidMount(){
+        if(this.props.auth.isAuthenticated){
+            this.props.history.push('/books')
+        }
+    }
     componentWillReceiveProps(nextProps){
         if(nextProps.auth.isAuthenticated){
             this.props.history.push('/books')

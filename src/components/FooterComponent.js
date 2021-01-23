@@ -26,7 +26,7 @@ const HeadingList = styled.h6`
 
 const Line = styled.hr`
     border: solid 1px grey;
-    width: 700px`;
+    width: 50vh`;
 
 const Footer = () =>{
     return(
@@ -56,8 +56,8 @@ const Footer = () =>{
                                 <Col><HeadingList>LinkedIn</HeadingList></Col>
                             </Social></Col>
                         </Row>
-                        <Row><Line/></Row>
                     </Container>
+                    <Line />
                     <Container className="justify-content-center"><Row><HeadingList>© CEC CSE Department</HeadingList></Row></Container>
                 </Navbar>
             </Styles>
