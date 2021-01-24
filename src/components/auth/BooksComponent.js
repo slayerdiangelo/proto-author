@@ -18,12 +18,6 @@ const Styles = styled.div`
     `;
 const BookStyles = styled.div`  
     margin: 10px;`;
-
-const Image=styled.div`
-    width: 100%;
-    height: 23vw;
-    object-fit: cover;`;
-
 const Top = styled.div`
     .jumbo{
         background: url("/images/cover.jpg");
@@ -64,9 +58,9 @@ class Books extends Component{
                             return(
                                 <Col md={4}>
                                     <BookStyles>
-                                    <Card><Image>
-                                        <CardImg src='/images/img-1.jpg' alt="Card image cap" />
-                                        </Image><CardBody>
+                                    <Card>
+                                        <CardImg src='/images/img-1.jpg' style={{ maxHeight: '400px', maxWidth: '400px', marginTop: '10px'}} alt="Card image cap" />
+                                        <CardBody>
                                             <CardTitle tag="h5">{book.title}</CardTitle>
                                                 <CardSubtitle tag="h6" className="mb-2 text-muted">₹ {book.price}</CardSubtitle>
                                             <CardText>{book.author}</CardText>

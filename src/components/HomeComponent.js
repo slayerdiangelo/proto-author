@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {
     Container, Row, Col, Card, Button, CardImg, CardBody,
     CardTitle, CardText } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
+import { connect }  from "react-redux";
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import styled from'styled-components';
@@ -15,6 +16,11 @@ const Styles=styled.div`
     `;
 
 class Home extends Component{
+    componentDidMount() {
+        if (this.props.auth.isAuthenticated) {
+            this.props.history.push('/books')
+        }
+    }
     render(){
         return(
             <>
@@ -50,4 +56,7 @@ class Home extends Component{
         )
     }
 }
-export default Home;
+const mapStateToProps = state => ({
+    auth: state.auth
+})
+export default connect(mapStateToProps)(withRouter(Home));
